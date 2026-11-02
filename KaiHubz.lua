@@ -930,6 +930,25 @@ task.spawn(function()
     end
 end)
 
+-- Universal Roblox Anti-AFK / Anti-Idle Script
+-- Prevents the 20-minute disconnection kick
+
+local Players = game:GetService("Players")
+local VirtualUser = game:GetService("VirtualUser")
+local LocalPlayer = Players.LocalPlayer
+
+-- Connect to the Idled event which fires when no input is detected
+LocalPlayer.Idled:Connect(function()
+    -- Simulates a small camera movement/click to reset the idle timer
+    VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    task.wait(1)
+    VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    print("Anti-AFK: Kept active at " .. os.date("%X"))
+end)
+
+print("Anti-AFK Script Successfully Loaded!")
+
+
 --============================================================
 -- INITIALIZE
 --============================================================
